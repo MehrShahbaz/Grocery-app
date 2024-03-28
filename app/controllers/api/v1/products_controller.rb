@@ -6,19 +6,16 @@ module Api
     class ProductsController < ApplicationController
       before_action :set_product, only: %i[show update destroy]
 
-      # GET /products
       def index
         @products = Product.all
 
         render json: @products
       end
 
-      # GET /products/1
       def show
         render json: @product
       end
 
-      # POST /products
       def create
         @product = Product.new(product_params)
 
@@ -29,7 +26,6 @@ module Api
         end
       end
 
-      # PATCH/PUT /products/1
       def update
         if @product.update(product_params)
           render json: @product
@@ -38,22 +34,20 @@ module Api
         end
       end
 
-      # DELETE /products/1
       def destroy
         @product.destroy!
       end
 
       private
 
-      # Use callbacks to share common setup or constraints between actions.
       def set_product
         @product = Product.find(params[:id])
       end
 
-      # Only allow a list of trusted parameters through.
       def product_params
         params.require(:product).permit(:name, :manufacturer_id, :food_mart_id, :category_ids,
-                                        categories_attributes: [:name], manufacture_attributes: [:name], price_attributes: [:amount])
+                                        categories_attributes: [:name], manufacturer_attributes: [:name],
+                                        price_attributes: [:amount])
       end
     end
   end

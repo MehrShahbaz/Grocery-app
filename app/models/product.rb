@@ -15,5 +15,5 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :categories
   accepts_nested_attributes_for :manufacturer
   accepts_nested_attributes_for :food_mart
-  accepts_nested_attributes_for :price
+  accepts_nested_attributes_for :prices
 end

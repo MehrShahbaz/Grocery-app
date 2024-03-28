@@ -7,4 +7,5 @@ class ProductSerializer < ActiveModel::Serializer
   belongs_to :manufacturer, serializer: ManufacturerSerializer
   belongs_to :food_mart, serializer: FoodMartSerializer
   has_many :categories, serializer: CategorySerializer
+  has_many :prices, serializer: PriceSerializer
 end
