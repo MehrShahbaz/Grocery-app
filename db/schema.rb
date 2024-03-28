@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_28_122823) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_28_125108) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,4 +36,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_28_122823) do
     t.index ["name"], name: "manufacturer_name", unique: true
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "name", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "manufacturer_id"
+    t.bigint "food_mart_id"
+    t.index ["food_mart_id"], name: "index_products_on_food_mart_id"
+    t.index ["manufacturer_id"], name: "index_products_on_manufacturer_id"
+    t.index ["name"], name: "index_products_on_name", unique: true
+  end
+
+  add_foreign_key "products", "food_marts"
+  add_foreign_key "products", "manufacturers"
 end
