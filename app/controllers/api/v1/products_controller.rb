@@ -46,8 +46,10 @@ module Api
 
       def product_params
         params.require(:product).permit(:name, :manufacturer_id, :food_mart_id, :category_ids,
-                                        categories_attributes: [:name], manufacturer_attributes: [:name],
-                                        price_attributes: [:amount])
+                                        categories_attributes: [:name],
+                                        manufacturer_attributes: [:name],
+                                        price_attributes: [:amount],
+                                        reviews_attributes: %i[content rating title])
       end
     end
   end

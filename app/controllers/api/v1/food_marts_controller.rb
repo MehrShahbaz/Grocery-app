@@ -45,7 +45,7 @@ module Api
       end
 
       def food_mart_params
-        params.require(:food_mart).permit(:name, :location)
+        params.require(:food_mart).permit(:name, :location, :note)
       end
     end
   end
