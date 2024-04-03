@@ -20,7 +20,7 @@ module Api
         @product = Product.new(product_params)
 
         if @product.save
-          render json: @product, status: :created, location: @product
+          render json: @product, status: :created
         else
           render json: @product.errors, status: :unprocessable_entity
         end
@@ -45,10 +45,11 @@ module Api
       end
 
       def product_params
-        params.require(:product).permit(:name, :manufacturer_id, :food_mart_id, :category_ids,
+        params.require(:product).permit(:name, :manufacturer_id, :food_mart_id,
+                                        category_ids: [],
                                         categories_attributes: [:name],
                                         manufacturer_attributes: [:name],
-                                        price_attributes: [:amount],
+                                        prices_attributes: [:amount],
                                         reviews_attributes: %i[content rating title])
       end
     end

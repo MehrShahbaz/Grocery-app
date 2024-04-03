@@ -19,8 +19,8 @@ module Api
       def create
         @category = Category.new(category_params)
 
-        if @category.save
-          render json: @category, status: :created, location: @category
+        if @category.save!
+          render json: { category: @category }, status: :created
         else
           render json: @category.errors, status: :unprocessable_entity
         end

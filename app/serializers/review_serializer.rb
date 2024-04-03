@@ -23,4 +23,8 @@
 # ReviewSerializer
 class ReviewSerializer < ActiveModel::Serializer
   attributes :content, :rating, :title
+
+  def rating
+    object.rating.to_i
+  end
 end
