@@ -35,7 +35,10 @@ module Api
       end
 
       def destroy
+        id = @product.id
         @product.destroy!
+
+        render json: id, status: 200
       end
 
       private
