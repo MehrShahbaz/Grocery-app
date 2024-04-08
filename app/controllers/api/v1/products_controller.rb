@@ -7,9 +7,11 @@ module Api
       before_action :set_product, only: %i[show update destroy]
 
       def index
-        @products = Product.all.limit(10)
+        @products = Product.page(params[:page] || 1).per(params[:per_page])
 
-        render json: @products
+        count = Product.page(params[:page] || 1).per(params[:per_page]).total_count
+
+        render json: { products: ActiveModel::Serializer::CollectionSerializer.new(@products, serializer: ProductSerializer), count: count }
       end
 
       def show

@@ -15,7 +15,6 @@
 #
 #  index_products_on_food_mart_id     (food_mart_id)
 #  index_products_on_manufacturer_id  (manufacturer_id)
-#  index_products_on_name             (name) UNIQUE
 #
 # Foreign Keys
 #
@@ -23,11 +22,15 @@
 #  fk_rails_...  (manufacturer_id => manufacturers.id)
 #
 class ProductSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :count
 
   belongs_to :manufacturer, serializer: ManufacturerSerializer
   belongs_to :food_mart, serializer: FoodMartSerializer
   has_many :categories, serializer: CategorySerializer
   has_many :prices, serializer: PriceSerializer
   has_many :reviews, serializer: ReviewSerializer
+
+  def count
+    Product.count
+  end
 end
