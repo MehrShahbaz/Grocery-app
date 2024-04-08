@@ -7,11 +7,11 @@ module Api
       before_action :set_category, only: %i[show update destroy]
 
       def index
-        if params[:search]
-          @categories = Category.where("name LIKE ?", "%#{params[:search]}%")
-        else
-          @categories = Category.all.limit(10)
-        end
+        @categories = if params[:search]
+                        Category.where('name LIKE ?', "%#{params[:search]}%")
+                      else
+                        Category.all.limit(10)
+                      end
 
         render json: @categories
       end

@@ -64,9 +64,13 @@ categories = [
 ]
 
 # Create categories
+puts 'Creating Categories'
 categories.each do |category_name|
   Category.create(name: category_name)
+  print '.'
 end
+
+puts ''
 
 food_marts = [
     {name: 'Lidl', location: 'https://maps.app.goo.gl/XP5gwpUh2Ymxz7KM7', note: 'Berliner Straße'},
@@ -80,10 +84,15 @@ food_marts = [
     {name: 'Woolworth', location: 'https://maps.app.goo.gl/33NE71GHaNiLVacu8', note: 'Potsdamer Str. 120, 10785 Berlin'},
 ]
 
+puts 'Creating Food Marts'
 food_marts.each do |food_mart|
     FoodMart.create(name: food_mart[:name], location: food_mart[:location], note: food_mart[:note])
+    print '.'
 end
 
+puts ''
+
+puts 'Creating Products'
 (1..1000).each do |number|
   category = (0..rand(7)).map do |x| rand(1..51) end.uniq
   prices = (0..rand(7)).map do |x| {amount: rand(1..10)} end
@@ -92,4 +101,5 @@ end
     name: "Product #{number}", prices_attributes: prices, food_mart_id: rand(1..9), category_ids: category,
   reviews_attributes: reviews
   )
+  print '.'
 end

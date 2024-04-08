@@ -5,11 +5,13 @@ module Api
     # ProductsController
     class ProductsController < ApplicationController
       before_action :set_product, only: %i[show update destroy]
+      before_action :set_search_products, only: %i[index]
 
       def index
-        @products = Product.all.limit(10)
-
-        render json: @products
+        render json: {
+          products: ActiveModel::Serializer::CollectionSerializer.new(@products, serializer: ProductSerializer),
+          count: @count
+        }
       end
 
       def show
@@ -45,6 +47,16 @@ module Api
 
       def set_product
         @product = Product.find(params[:id])
+      end
+
+      def set_search_products
+        if params[:search].present?
+          @products = Product.where('name LIKE ?', "%#{params[:search]}%").page(1).per(params[:per_page])
+          @count = Product.where('name LIKE ?', "%#{params[:search]}%").count
+        else
+          @products = Product.page(params[:page] || 1).per(params[:per_page])
+          @count = @products.total_count
+        end
       end
 
       def product_params

@@ -18,6 +18,8 @@ gem 'bootsnap', require: false
 
 gem 'rack-cors'
 
+gem 'kaminari'
+
 group :development, :test do
   gem 'annotate'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

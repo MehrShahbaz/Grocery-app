@@ -15,7 +15,6 @@
 #
 #  index_products_on_food_mart_id     (food_mart_id)
 #  index_products_on_manufacturer_id  (manufacturer_id)
-#  index_products_on_name             (name) UNIQUE
 #
 # Foreign Keys
 #
@@ -23,7 +22,7 @@
 #  fk_rails_...  (manufacturer_id => manufacturers.id)
 #
 class Product < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
   validates :prices, presence: true
 
   belongs_to :manufacturer, optional: true
