@@ -11,7 +11,10 @@ module Api
 
         count = Product.page(params[:page] || 1).per(params[:per_page]).total_count
 
-        render json: { products: ActiveModel::Serializer::CollectionSerializer.new(@products, serializer: ProductSerializer), count: count }
+        render json: {
+          products: ActiveModel::Serializer::CollectionSerializer.new(@products,
+                                                                      serializer: ProductSerializer), count: count
+        }
       end
 
       def show
