@@ -7,7 +7,11 @@ module Api
       before_action :set_category, only: %i[show update destroy]
 
       def index
-        @categories = Category.all
+        if params[:search]
+          @categories = Category.where("name LIKE ?", "%#{params[:search]}%")
+        else
+          @categories = Category.all.limit(10)
+        end
 
         render json: @categories
       end
@@ -19,8 +23,8 @@ module Api
       def create
         @category = Category.new(category_params)
 
-        if @category.save
-          render json: @category, status: :created, location: @category
+        if @category.save!
+          render json: @category, status: :created
         else
           render json: @category.errors, status: :unprocessable_entity
         end

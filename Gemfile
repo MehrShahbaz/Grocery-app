@@ -16,6 +16,8 @@ gem 'tzinfo-data', platforms: %i[mswin mswin64 mingw x64_mingw jruby]
 
 gem 'bootsnap', require: false
 
+gem 'rack-cors'
+
 group :development, :test do
   gem 'annotate'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

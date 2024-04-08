@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :manufacturers
       resources :food_marts
       resources :products
+      resources :reviews
     end
   end
 end

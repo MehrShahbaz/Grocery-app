@@ -13,7 +13,6 @@
 #
 #  category_name  (name) UNIQUE
 #
-# Category Serializer
 class CategorySerializer < ActiveModel::Serializer
   attributes :id, :name
 end

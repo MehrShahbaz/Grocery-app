@@ -6,6 +6,12 @@ module Api
     class ReviewsController < ApplicationController
       before_action :set_review, only: %i[show update destroy]
 
+      def index
+        @reviews = Review.all
+
+        render json: @reviews
+      end
+
       def show
         render json: @review
       end

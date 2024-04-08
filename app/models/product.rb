@@ -8,7 +8,7 @@
 #  name            :string(255)      not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  food_mart_id    :bigint
+#  food_mart_id    :bigint           not null
 #  manufacturer_id :bigint
 #
 # Indexes
@@ -22,13 +22,11 @@
 #  fk_rails_...  (food_mart_id => food_marts.id)
 #  fk_rails_...  (manufacturer_id => manufacturers.id)
 #
-# Product
 class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true
-  validates :categories, presence: true
   validates :prices, presence: true
 
-  belongs_to :manufacturer
+  belongs_to :manufacturer, optional: true
   belongs_to :food_mart
   has_many :prices, dependent: :destroy
   has_many :product_categories, dependent: :destroy
