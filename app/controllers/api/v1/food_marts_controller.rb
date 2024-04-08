@@ -13,7 +13,7 @@ module Api
       end
 
       def show
-        render json: { food_mart: @food_mart }
+        render json: @food_mart
       end
 
       def create

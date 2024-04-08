@@ -7,7 +7,7 @@ module Api
       before_action :set_product, only: %i[show update destroy]
 
       def index
-        @products = Product.all
+        @products = Product.all.limit(10)
 
         render json: @products
       end
@@ -38,7 +38,7 @@ module Api
         id = @product.id
         @product.destroy!
 
-        render json: id, status: 200
+        render json: id, status: :ok
       end
 
       private

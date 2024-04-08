@@ -6,7 +6,7 @@
 #  name            :string(255)      not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  food_mart_id    :bigint
+#  food_mart_id    :bigint           not null
 #  manufacturer_id :bigint
 #
 # Indexes

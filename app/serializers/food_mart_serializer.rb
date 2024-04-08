@@ -15,7 +15,6 @@
 #
 #  index_food_marts_on_location  (location) UNIQUE
 #
-# Food Mart Serializer
 class FoodMartSerializer < ActiveModel::Serializer
   attributes :id, :name, :location, :note
 end

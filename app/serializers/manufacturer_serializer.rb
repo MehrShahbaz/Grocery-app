@@ -13,7 +13,6 @@
 #
 #  manufacturer_name  (name) UNIQUE
 #
-# ManufacturerSerializer
 class ManufacturerSerializer < ActiveModel::Serializer
   attributes :id, :name
 end

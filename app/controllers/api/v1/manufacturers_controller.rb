@@ -44,7 +44,6 @@ module Api
         @manufacturer = Manufacturer.find(params[:id])
       end
 
-      # Only allow a list of trusted parameters through.
       def manufacturer_params
         params.require(:manufacturer).permit(:name)
       end

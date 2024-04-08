@@ -20,5 +20,5 @@ class FoodMart < ApplicationRecord
   validates :name, presence: true
   validates :location, presence: true, uniqueness: true
 
-  has_one :product, dependent: :destroy
+  has_many :products, dependent: :destroy
 end

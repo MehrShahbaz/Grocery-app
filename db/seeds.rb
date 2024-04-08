@@ -83,3 +83,13 @@ food_marts = [
 food_marts.each do |food_mart|
     FoodMart.create(name: food_mart[:name], location: food_mart[:location], note: food_mart[:note])
 end
+
+(1..1000).each do |number|
+  category = (0..rand(7)).map do |x| rand(1..51) end.uniq
+  prices = (0..rand(7)).map do |x| {amount: rand(1..10)} end
+  reviews = (0..rand(10)).map do |x| {content: "Content #{x}", rating: rand(1..5)} end
+  Product.create!(
+    name: "Product #{number}", prices_attributes: prices, food_mart_id: rand(1..9), category_ids: category,
+  reviews_attributes: reviews
+  )
+end

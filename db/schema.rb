@@ -61,7 +61,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_28_140849) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "manufacturer_id"
-    t.bigint "food_mart_id"
+    t.bigint "food_mart_id", null: false
     t.index ["food_mart_id"], name: "index_products_on_food_mart_id"
     t.index ["manufacturer_id"], name: "index_products_on_manufacturer_id"
     t.index ["name"], name: "index_products_on_name", unique: true
