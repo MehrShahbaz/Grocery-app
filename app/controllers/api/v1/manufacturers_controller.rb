@@ -20,7 +20,7 @@ module Api
         @manufacturer = Manufacturer.new(manufacturer_params)
 
         if @manufacturer.save
-          render json: @manufacturer, status: :created, location: @manufacturer
+          render json: @manufacturer, status: :created
         else
           render json: @manufacturer.errors, status: :unprocessable_entity
         end
