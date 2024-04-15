@@ -45,7 +45,7 @@ module Api
       end
 
       def set_search_products
-        @products = Product.where('name LIKE ?', "%#{params[:search]}%").page(params[:page] || 1).per(params[:per_page])
+        @products = Product.where('name LIKE ?', "%#{params[:search]}%").order(:name).page(params[:page] || 1).per(params[:per_page])
         @count = @products.total_count
       end
 
