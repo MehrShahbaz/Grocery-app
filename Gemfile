@@ -28,6 +28,7 @@ group :development, :test do
   gem 'overcommit', require: false
   gem 'rspec-rails'
   gem 'rubocop-rails', require: false
+  gem 'shoulda-matchers', '~> 6.1'
   gem 'simplecov', require: false, group: :test
 end
 

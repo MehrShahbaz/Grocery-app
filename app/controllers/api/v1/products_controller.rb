@@ -2,16 +2,13 @@
 
 module Api
   module V1
-    # ProductsController
+    # Products Controller
     class ProductsController < ApplicationController
       before_action :set_product, only: %i[show update destroy]
       before_action :set_search_products, only: %i[index]
 
       def index
-        render json: {
-          products: ActiveModel::Serializer::CollectionSerializer.new(@products, serializer: ProductSerializer),
-          count: @count
-        }
+        render json: { products: serialized_products, count: @count }
       end
 
       def show
@@ -24,7 +21,7 @@ module Api
         if @product.save
           render json: @product, status: :created
         else
-          render json: @product.errors, status: :unprocessable_entity
+          render_errors(@product)
         end
       end
 
@@ -32,15 +29,13 @@ module Api
         if @product.update(product_params)
           render json: @product
         else
-          render json: @product.errors, status: :unprocessable_entity
+          render_errors(@product)
         end
       end
 
       def destroy
-        id = @product.id
-        @product.destroy!
-
-        render json: id, status: :ok
+        @product.destroy
+        render json: { id: @product.id }, status: :ok
       end
 
       private
@@ -50,13 +45,8 @@ module Api
       end
 
       def set_search_products
-        if params[:search].present?
-          @products = Product.where('name LIKE ?', "%#{params[:search]}%").page(1).per(params[:per_page])
-          @count = Product.where('name LIKE ?', "%#{params[:search]}%").count
-        else
-          @products = Product.page(params[:page] || 1).per(params[:per_page])
-          @count = @products.total_count
-        end
+        @products = Product.where('name LIKE ?', "%#{params[:search]}%").page(params[:page] || 1).per(params[:per_page])
+        @count = @products.total_count
       end
 
       def product_params
@@ -66,6 +56,14 @@ module Api
                                         manufacturer_attributes: [:name],
                                         prices_attributes: [:amount],
                                         reviews_attributes: %i[content rating title])
+      end
+
+      def serialized_products
+        ActiveModel::Serializer::CollectionSerializer.new(@products, serializer: ProductSerializer)
+      end
+
+      def render_errors(resource)
+        render json: { errors: resource.errors.full_messages }, status: :unprocessable_entity
       end
     end
   end
