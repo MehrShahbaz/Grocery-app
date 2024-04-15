@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: manufacturers
@@ -13,8 +11,10 @@
 #
 #  manufacturer_name  (name) UNIQUE
 #
+# spec/factories/manufacturers.rb
+
 FactoryBot.define do
   factory :manufacturer do
-    name { 'MyString' }
+    name { Faker::Company.name }
   end
 end

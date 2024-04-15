@@ -22,8 +22,7 @@
 #  fk_rails_...  (manufacturer_id => manufacturers.id)
 #
 class Product < ApplicationRecord
-  validates :name, presence: true
-  validates :prices, presence: true
+  validates :name, :prices, presence: true
 
   belongs_to :manufacturer, optional: true
   belongs_to :food_mart
