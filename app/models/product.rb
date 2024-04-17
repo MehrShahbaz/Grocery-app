@@ -31,9 +31,5 @@ class Product < ApplicationRecord
   has_many :categories, through: :product_categories
   has_many :reviews, dependent: :destroy
 
-  accepts_nested_attributes_for :categories
-  accepts_nested_attributes_for :manufacturer
-  accepts_nested_attributes_for :food_mart
-  accepts_nested_attributes_for :prices
-  accepts_nested_attributes_for :reviews
+  accepts_nested_attributes_for :categories, :manufacturer, :food_mart, :prices, :reviews
 end
