@@ -44,9 +44,23 @@ module Api
         @product = Product.find(params[:id])
       end
 
+      def food_mart_ids
+        params[:food_marts_ids].split(',').map(&:to_i)
+      end
+
+      def conditions
+        params[:food_marts_ids].present? ? { food_marts: { id: food_mart_ids } } : {}
+      end
+
       def set_search_products
-        @products = Product.where('name LIKE ?',
-                                  "%#{params[:search]}%").order(:name).page(params[:page] || 1).per(params[:per_page])
+        @products = Product.includes(:food_mart)
+                           .joins(:categories)
+                           .where(conditions)
+                           .where('products.name ILIKE :search OR categories.name ILIKE :search', search: "%#{params[:search]}%")
+                           .order(:name)
+                           .page(params[:page] || 1)
+                           .per(params[:per_page] || 5)
+                           .distinct
         @count = @products.total_count
       end
 

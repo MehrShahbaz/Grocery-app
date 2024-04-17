@@ -10,7 +10,7 @@ module Api
         @categories = if params[:search]
                         Category.where('name LIKE ?', "%#{params[:search]}%")
                       else
-                        Category.all.limit(10)
+                        Category.all
                       end
 
         render json: @categories

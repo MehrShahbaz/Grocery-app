@@ -14,5 +14,9 @@
 #  category_name  (name) UNIQUE
 #
 class CategorySerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :count
+
+  def count
+    object.products.count
+  end
 end
