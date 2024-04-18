@@ -21,5 +21,13 @@
 #
 # PriceSerializer
 class PriceSerializer < ActiveModel::Serializer
-  attributes :amount
+  attributes :amount, :created_at
+
+  def amount
+    object.amount.to_i
+  end
+
+  def created_at
+    object.created_at.to_i
+  end
 end
